@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1834800401080533426}
   m_Layer: 0
   m_Name: Soffa
-  m_TagString: Untagged
+  m_TagString: Furniture
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 1736896219910914784}
+  scaleDuration: 0
   targetScale: {x: 1, y: 1, z: 1}
 --- !u!1 &3441154012090561142
 GameObject:

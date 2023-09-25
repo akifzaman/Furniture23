@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using EnhancedTouch = UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.XR.ARSubsystems;
-[RequireComponent(typeof(ARRaycastManager), typeof(ARPlaneManager))]
+
 public class PlaceObject : MonoBehaviour
 {
     public ItemController itemController;
@@ -37,6 +37,7 @@ public class PlaceObject : MonoBehaviour
         {
             Pose pose = hits[0].pose;
             var obj = Instantiate(itemController.prefab, pose.position, pose.rotation);
+            obj.GetComponent<ItemController>().initialPosition = pose.position;
             obj.GetComponent<ItemController>().Initialize();
         }
     }
