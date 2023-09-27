@@ -49,6 +49,7 @@ MonoBehaviour:
   prefab: {fileID: 3707109897055315801}
   scaleDuration: 0.5
   targetScale: {x: 0.7, y: 0.7, z: 0.7}
+  initialPosition: {x: 0, y: 0, z: 0}
 --- !u!65 &4265005864603355193
 BoxCollider:
   m_ObjectHideFlags: 0
