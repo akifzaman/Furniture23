@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1386f9808ef94444b8b62927aac23de6, type: 3}
   m_Name: New Item 2
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 1736896219910914784, guid: e8d8ce0e358563746944047882ab98e5, type: 3}
   ItemIcon: {fileID: 0}
   Name: Sofa
   Price: 300

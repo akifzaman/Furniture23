@@ -6,7 +6,6 @@ using UnityEngine.XR.ARSubsystems;
 
 public class PlaceObject : MonoBehaviour
 {
-    public ItemController itemController;
     private ARRaycastManager aRRaycastManager;
     private ARPlaneManager aRPlaneManager;
 
@@ -16,7 +15,7 @@ public class PlaceObject : MonoBehaviour
         aRRaycastManager = GetComponent<ARRaycastManager>();
         aRPlaneManager = GetComponent<ARPlaneManager>();
     }
-
+    
     private void OnEnable()
     {
         EnhancedTouch.TouchSimulation.Enable();
@@ -36,7 +35,7 @@ public class PlaceObject : MonoBehaviour
         if (aRRaycastManager.Raycast(finger.currentTouch.screenPosition, hits, TrackableType.PlaneWithinPolygon))
         {
             Pose pose = hits[0].pose;
-            var obj = Instantiate(itemController.prefab, pose.position, pose.rotation);
+            var obj = Instantiate(ApplicationManager.instance.SelectedItem.Prefab, pose.position, pose.rotation);
             obj.GetComponent<ItemController>().initialPosition = pose.position;
             obj.GetComponent<ItemController>().Initialize();
         }
