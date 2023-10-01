@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: New Item 2
   m_EditorClassIdentifier: 
   Prefab: {fileID: 1736896219910914784, guid: e8d8ce0e358563746944047882ab98e5, type: 3}
-  ItemIcon: {fileID: 0}
+  ItemIcon: {fileID: 21300000, guid: c90ea6650065f194d87d1f756e1827fa, type: 3}
   Name: Sofa
   Price: 300
   Type: 3
+  AvailableTextures:
+  - {fileID: 21300000, guid: af6bcea09b8134831b6599e2900aef81, type: 3}
+  - {fileID: 21300000, guid: af6bcea09b8134831b6599e2900aef81, type: 3}
+  Materials: []
   Index: 2

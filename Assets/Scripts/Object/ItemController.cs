@@ -8,6 +8,7 @@ public class ItemController : MonoBehaviour
     public float scaleDuration;
     [SerializeField] private Vector3 targetScale;
     public Vector3 initialPosition;
+    public bool isSelected;
     public void Initialize()
     {
         StartScaleAnimation(targetScale, scaleDuration, prefab);
@@ -22,17 +23,19 @@ public class ItemController : MonoBehaviour
                 RaycastHit raycastHit;
                 if (Physics.Raycast(raycast, out raycastHit))
                 {
-                    if (raycastHit.collider.CompareTag("Furniture"))
+                    if (raycastHit.collider.CompareTag("Furniture") && !isSelected)
                     {
+                        isSelected = true;
                         prefab.GetComponentInChildren<Outline>().color = 2;
                         OnItemSelect();
                     }
-                }
-                else
-                {
-                    prefab.GetComponentInChildren<Outline>().color = 0;
-                    OnItemDeselect();
-                }
+                    else if (raycastHit.collider.CompareTag("Furniture") && isSelected)
+                    {
+                        isSelected = false;
+                        prefab.GetComponentInChildren<Outline>().color = 0;
+                        OnItemDeselect();
+                    }
+                }       
             }
         }
     }
@@ -45,7 +48,7 @@ public class ItemController : MonoBehaviour
                 Debug.Log("AnimationCompleted");
             });
     }
-    private void OnItemSelect()
+    private void StartHoverAnimation()
     {
         var upperPoint = new Vector3(initialPosition.x, initialPosition.y + 0.2f, initialPosition.z);
         prefab.transform.DOMove(upperPoint, 1f)
@@ -54,11 +57,18 @@ public class ItemController : MonoBehaviour
             {
                 prefab.transform.DOMove(initialPosition, 1f)
                 .SetEase(Ease.Linear)
-                .OnComplete(OnItemSelect);
+                .OnComplete(StartHoverAnimation);
             });
+    }
+    private void OnItemSelect()
+    {
+        UIManager.instance.ShowTexturePanel();       
+        UIManager.instance.InstantiateTextureButtons(ApplicationManager.instance.SelectedItem);
+        StartHoverAnimation();
     }
     private void OnItemDeselect()
     {
+        UIManager.instance.ShowItemPanel();
         DOTween.Kill(prefab.transform);
         if (prefab.transform.position == initialPosition) return;
         prefab.transform.DOMove(initialPosition, 1f).SetEase(Ease.Linear);       

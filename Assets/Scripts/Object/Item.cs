@@ -1,6 +1,5 @@
-using System.ComponentModel;
 using UnityEngine;
-using UnityEngine.UI;
+using System.Collections.Generic;
 [CreateAssetMenu(menuName = "Create New Item")]
 public class Item: ScriptableObject
 {
@@ -10,6 +9,9 @@ public class Item: ScriptableObject
     public string Name;
     public float Price;
     public ItemType Type;
+    public List<Sprite> AvailableTextures;
+    public List<Material> Materials;
+    public Dictionary<Sprite, Material> SpriteToMaterial = new Dictionary<Sprite, Material>();
     public int Index;
 }
 public enum ItemType

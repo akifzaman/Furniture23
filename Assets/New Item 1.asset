@@ -13,8 +13,13 @@ MonoBehaviour:
   m_Name: New Item 1
   m_EditorClassIdentifier: 
   Prefab: {fileID: 5987821524880206901, guid: badb87b816e41644d82768ec6c14ef4b, type: 3}
-  ItemIcon: {fileID: 0}
+  ItemIcon: {fileID: 21300000, guid: 2bf859fa97791a9439d4a0607983cd25, type: 3}
   Name: Table
   Price: 100
   Type: 2
+  AvailableTextures:
+  - {fileID: 21300000, guid: af6bcea09b8134831b6599e2900aef81, type: 3}
+  - {fileID: 21300000, guid: af6bcea09b8134831b6599e2900aef81, type: 3}
+  - {fileID: 21300000, guid: af6bcea09b8134831b6599e2900aef81, type: 3}
+  Materials: []
   Index: 1
