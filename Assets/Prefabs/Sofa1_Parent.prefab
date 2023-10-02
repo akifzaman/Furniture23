@@ -83,6 +83,7 @@ GameObject:
   - component: {fileID: 7871389012778907603}
   - component: {fileID: 1942578322586893564}
   - component: {fileID: 4163868372350457660}
+  - component: {fileID: 3194988602807551930}
   m_Layer: 0
   m_Name: sofa_1
   m_TagString: Untagged
@@ -155,6 +156,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3194988602807551930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5998899973475028071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 0
 --- !u!1 &8596385122971900268
 GameObject:
   m_ObjectHideFlags: 0

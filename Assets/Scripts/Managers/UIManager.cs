@@ -1,5 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -12,6 +13,10 @@ public class UIManager : MonoBehaviour
     public ScrollViewButtonController TextureButtonPrefab;
     public Vector2 DisplayPosition;
     public Vector2 HidePosition;
+    public RectTransform Dropdown;
+    public Image DropdownTogglerIcon;
+    public Vector2 DropdownInitialPosition;
+    public float distance;
     #region Singleton
     private void Awake()
     {
@@ -30,6 +35,7 @@ public class UIManager : MonoBehaviour
         InstantiateItemButtons();
         DisplayPosition = ItemButtonsPanel.anchoredPosition;
         HidePosition = TextureButtonsPanel.anchoredPosition;
+        DropdownInitialPosition = Dropdown.anchoredPosition;
     }
 
     public void InstantiateItemButtons()
@@ -76,5 +82,13 @@ public class UIManager : MonoBehaviour
         {
             TextureButtonsPanel.gameObject.SetActive(false);
         });
+    }
+
+    public void ToggleDropdownVisibility()
+    {
+        distance = Dropdown.gameObject.activeInHierarchy ? -distance : distance;
+        Dropdown.gameObject.SetActive(true);
+        Dropdown.DOAnchorPosX(DropdownInitialPosition.x + distance, 0.25f).SetEase(Ease.Linear); //replace the hardcoded values
+        DropdownTogglerIcon.transform.DOScaleX(DropdownTogglerIcon.transform.localScale.x * -1, 0.10f);      
     }
 }

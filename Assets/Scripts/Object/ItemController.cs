@@ -8,10 +8,13 @@ public class ItemController : MonoBehaviour
     public float scaleDuration;
     [SerializeField] private Vector3 targetScale;
     public Vector3 initialPosition;
-    public bool isSelected;
     public void Initialize()
     {
-        StartScaleAnimation(targetScale, scaleDuration, prefab);
+        prefab = ApplicationManager.instance.SelectedItem.Prefab;
+        ApplicationManager.instance.SelectedObject = prefab;
+        prefab.GetComponentInChildren<Outline>().color = 2;
+        ItemAnimationController.Instance.StartScaleAnimation(targetScale, scaleDuration, prefab);
+        OnItemSelect();
     }
     private void Update()
     {
@@ -23,15 +26,15 @@ public class ItemController : MonoBehaviour
                 RaycastHit raycastHit;
                 if (Physics.Raycast(raycast, out raycastHit))
                 {
-                    if (raycastHit.collider.CompareTag("Furniture") && !isSelected)
+                    if (raycastHit.collider.CompareTag("Furniture") && ApplicationManager.instance.SelectedObject == null)
                     {
-                        isSelected = true;
+                        ApplicationManager.instance.SelectedObject = prefab;
                         prefab.GetComponentInChildren<Outline>().color = 2;
                         OnItemSelect();
                     }
-                    else if (raycastHit.collider.CompareTag("Furniture") && isSelected)
+                    else if (raycastHit.collider.CompareTag("Furniture") && ApplicationManager.instance.SelectedObject != null)
                     {
-                        isSelected = false;
+                        ApplicationManager.instance.SelectedObject = null;
                         prefab.GetComponentInChildren<Outline>().color = 0;
                         OnItemDeselect();
                     }
@@ -40,37 +43,26 @@ public class ItemController : MonoBehaviour
         }
     }
 
-    private void StartScaleAnimation(Vector3 targetScale, float duration, GameObject item)
-    {
-        item.transform.DOScale(targetScale, duration)
-            .SetEase(Ease.Linear)
-            .OnComplete(() => {
-                Debug.Log("AnimationCompleted");
-            });
-    }
-    private void StartHoverAnimation()
-    {
-        var upperPoint = new Vector3(initialPosition.x, initialPosition.y + 0.2f, initialPosition.z);
-        prefab.transform.DOMove(upperPoint, 1f)
-            .SetEase(Ease.Linear)
-            .OnComplete(() =>
-            {
-                prefab.transform.DOMove(initialPosition, 1f)
-                .SetEase(Ease.Linear)
-                .OnComplete(StartHoverAnimation);
-            });
-    }
+    //private void StartScaleAnimation(Vector3 targetScale, float duration, GameObject item)
+    //{
+    //    item.transform.DOScale(targetScale, duration)
+    //        .SetEase(Ease.Linear)
+    //        .OnComplete(() => {
+    //            Debug.Log("AnimationCompleted");
+    //        });
+    //}
     private void OnItemSelect()
     {
         UIManager.instance.ShowTexturePanel();       
         UIManager.instance.InstantiateTextureButtons(ApplicationManager.instance.SelectedItem);
-        StartHoverAnimation();
+        ItemAnimationController.Instance.StartHoverAnimation(prefab, initialPosition);
     }
     private void OnItemDeselect()
     {
         UIManager.instance.ShowItemPanel();
-        DOTween.Kill(prefab.transform);
-        if (prefab.transform.position == initialPosition) return;
-        prefab.transform.DOMove(initialPosition, 1f).SetEase(Ease.Linear);       
+        ItemAnimationController.Instance.StopHoverAnimation(prefab, initialPosition);
+        //DOTween.Kill(prefab.transform);
+        //if (prefab.transform.position == initialPosition) return;
+        //prefab.transform.DOMove(initialPosition, 1f).SetEase(Ease.Linear);       
     }
 }
