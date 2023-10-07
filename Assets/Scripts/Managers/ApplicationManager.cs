@@ -6,7 +6,6 @@ public class ApplicationManager : MonoBehaviour
     public static ApplicationManager instance;
     public List<Item> Items = new List<Item>();
     public Item SelectedItem;
-    public GameObject SelectedObject;
     #region Singleton
     private void Awake()
     {

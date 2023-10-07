@@ -36,20 +36,19 @@ public class PlaceObject : MonoBehaviour
         {
             Pose pose = hits[0].pose;
             var obj = Instantiate(ApplicationManager.instance.SelectedItem.Prefab, pose.position, pose.rotation);
-            ApplicationManager.instance.SelectedObject = ApplicationManager.instance.SelectedItem.Prefab;
-            obj.GetComponent<ItemController>().initialPosition = pose.position;
-            obj.GetComponent<ItemController>().Initialize(obj);
+            ItemPicker.instance.currentGameObject = obj;
+            ItemPicker.instance.currentGameObject.GetComponent<ItemController>().initialPosition = pose.position;
+            ItemPicker.instance.currentGameObject.GetComponent<ItemController>().Initialize();
         }
     }
-    [ContextMenu("PlaceObject")]
-    public void PlaceObjectFromMenu()
-    {
-        if (ApplicationManager.instance.SelectedItem != null)
-        {
-            var obj = Instantiate(ApplicationManager.instance.SelectedItem.Prefab, new Vector3(0, 0, 0), Quaternion.identity);
-            ApplicationManager.instance.SelectedObject = ApplicationManager.instance.SelectedItem.Prefab;
-            obj.GetComponent<ItemController>().initialPosition = new Vector3(0, 0, 0);
-            obj.GetComponent<ItemController>().Initialize(obj);
-        }   
-    }
+    //[ContextMenu("PlaceObject")]
+    //public void PlaceObjectFromMenu()
+    //{
+    //    if (ApplicationManager.instance.SelectedItem != null)
+    //    {
+    //        var obj = Instantiate(ApplicationManager.instance.SelectedItem.Prefab, new Vector3(0, 0, 0), Quaternion.identity);
+    //        obj.GetComponent<ItemController>().initialPosition = new Vector3(0, 0, 0);
+    //        obj.GetComponent<ItemController>().Initialize(obj);
+    //    }   
+    //}
 }
