@@ -20,24 +20,36 @@ public class PlaceObject : MonoBehaviour
     {
         EnhancedTouch.TouchSimulation.Enable();
         EnhancedTouch.EnhancedTouchSupport.Enable();
-        EnhancedTouch.Touch.onFingerDown += FingerDown;
+        EnhancedTouch.Touch.onFingerDown += OnFingerDown;
     }
     private void OnDisable()
     {
         EnhancedTouch.TouchSimulation.Disable();
         EnhancedTouch.EnhancedTouchSupport.Disable();
-        EnhancedTouch.Touch.onFingerDown -= FingerDown;
+        EnhancedTouch.Touch.onFingerDown -= OnFingerDown;
     }
 
-    private void FingerDown(EnhancedTouch.Finger finger)
+    private void OnFingerDown(EnhancedTouch.Finger finger)
     {
         if (finger.index != 0) return;
         if (aRRaycastManager.Raycast(finger.currentTouch.screenPosition, hits, TrackableType.PlaneWithinPolygon))
         {
             Pose pose = hits[0].pose;
             var obj = Instantiate(ApplicationManager.instance.SelectedItem.Prefab, pose.position, pose.rotation);
+            ApplicationManager.instance.SelectedObject = ApplicationManager.instance.SelectedItem.Prefab;
             obj.GetComponent<ItemController>().initialPosition = pose.position;
-            obj.GetComponent<ItemController>().Initialize();
+            obj.GetComponent<ItemController>().Initialize(obj);
         }
+    }
+    [ContextMenu("PlaceObject")]
+    public void PlaceObjectFromMenu()
+    {
+        if (ApplicationManager.instance.SelectedItem != null)
+        {
+            var obj = Instantiate(ApplicationManager.instance.SelectedItem.Prefab, new Vector3(0, 0, 0), Quaternion.identity);
+            ApplicationManager.instance.SelectedObject = ApplicationManager.instance.SelectedItem.Prefab;
+            obj.GetComponent<ItemController>().initialPosition = new Vector3(0, 0, 0);
+            obj.GetComponent<ItemController>().Initialize(obj);
+        }   
     }
 }

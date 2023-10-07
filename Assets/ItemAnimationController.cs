@@ -3,12 +3,20 @@ using UnityEngine;
 
 public class ItemAnimationController : MonoBehaviour
 {
-    public static ItemAnimationController Instance;
-    public void Awake()
+    public static ItemAnimationController instance;
+    #region Singleton
+    private void Awake()
     {
-        if(Instance != null) Instance = this;
-        else Destroy(gameObject);
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(instance);
+        }
     }
+    #endregion
     public void StartScaleAnimation(Vector3 targetScale, float duration, GameObject item)
     {
         item.transform.DOScale(targetScale, duration)
