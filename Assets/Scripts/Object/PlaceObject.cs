@@ -38,7 +38,7 @@ public class PlaceObject : MonoBehaviour
             var obj = Instantiate(ApplicationManager.instance.SelectedItem.Prefab, pose.position, pose.rotation);
             ItemPicker.instance.currentGameObject = obj;
             ItemPicker.instance.currentGameObject.GetComponent<ItemController>().initialPosition = pose.position;
-            ItemPicker.instance.currentGameObject.GetComponent<ItemController>().Initialize();
+            ItemPicker.instance.currentGameObject.GetComponent<ItemController>().Initialize(ApplicationManager.instance.SelectedItem);
         }
     }
     //[ContextMenu("PlaceObject")]

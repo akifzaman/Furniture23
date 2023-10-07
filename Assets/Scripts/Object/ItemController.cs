@@ -3,11 +3,13 @@ using cakeslice;
 
 public class ItemController : MonoBehaviour
 {
+    private Item item;
     public float scaleDuration;
     [SerializeField] private Vector3 targetScale;
     public Vector3 initialPosition;
-    public void Initialize()
+    public void Initialize(Item item)
     {
+        this.item = item;
         OnItemSelect();
         ItemAnimationController.instance.StartScaleAnimation(targetScale, scaleDuration, gameObject);
     }
@@ -15,7 +17,7 @@ public class ItemController : MonoBehaviour
     {
         GetComponentInChildren<Outline>().color = 2;
         UIManager.instance.ShowTexturePanel();       
-        UIManager.instance.InstantiateTextureButtons(ApplicationManager.instance.SelectedItem);
+        UIManager.instance.InstantiateTextureButtons(item);
         ItemAnimationController.instance.StartHoverAnimation(initialPosition, gameObject);
     }
     public void OnItemDeselect()

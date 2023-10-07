@@ -5,6 +5,7 @@ public class ItemPicker : MonoBehaviour
     public static ItemPicker instance;
 
     public GameObject currentGameObject;
+    public GameObject previousGameObject;
         #region Singleton
     private void Awake()
     {
@@ -36,7 +37,14 @@ public class ItemPicker : MonoBehaviour
                     else if (raycastHit.collider.CompareTag("Furniture") && currentGameObject != null)
                     {
                         currentGameObject.GetComponent<ItemController>().OnItemDeselect();
-                        currentGameObject = null;
+                        previousGameObject = currentGameObject;
+                        currentGameObject = raycastHit.collider.gameObject;
+                        if (currentGameObject == previousGameObject)
+                        {
+                            currentGameObject = null;
+                            return;
+                        }
+                        currentGameObject.GetComponent<ItemController>().OnItemSelect();
                     }
                 }
             }
