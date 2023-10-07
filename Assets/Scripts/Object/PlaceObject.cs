@@ -41,14 +41,4 @@ public class PlaceObject : MonoBehaviour
             ItemPicker.instance.currentGameObject.GetComponent<ItemController>().Initialize(ApplicationManager.instance.SelectedItem);
         }
     }
-    //[ContextMenu("PlaceObject")]
-    //public void PlaceObjectFromMenu()
-    //{
-    //    if (ApplicationManager.instance.SelectedItem != null)
-    //    {
-    //        var obj = Instantiate(ApplicationManager.instance.SelectedItem.Prefab, new Vector3(0, 0, 0), Quaternion.identity);
-    //        obj.GetComponent<ItemController>().initialPosition = new Vector3(0, 0, 0);
-    //        obj.GetComponent<ItemController>().Initialize(obj);
-    //    }   
-    //}
 }

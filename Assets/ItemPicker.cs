@@ -6,7 +6,7 @@ public class ItemPicker : MonoBehaviour
 
     public GameObject currentGameObject;
     public GameObject previousGameObject;
-        #region Singleton
+    #region Singleton
     private void Awake()
     {
         if (instance == null)
@@ -51,5 +51,3 @@ public class ItemPicker : MonoBehaviour
         }
     }
 }
-
-//handle the exception testcase where you want to select another gameobject from the world space when you already have a gameObject selected and hovering

@@ -1,9 +1,9 @@
 using DG.Tweening;
 using UnityEngine;
 
-public class ItemAnimationController : MonoBehaviour
+public class ItemAnimationManager : MonoBehaviour
 {
-    public static ItemAnimationController instance;
+    public static ItemAnimationManager instance;
 
     #region Singleton
     private void Awake()

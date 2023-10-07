@@ -62,26 +62,19 @@ public class UIManager : MonoBehaviour
             Destroy(element.gameObject);
         }
     }
-    [ContextMenu("ShowTexturePanel")]
     public void ShowTexturePanel()
     {
         ItemButtonsPanel.anchoredPosition = HidePosition;
+        ItemButtonsPanel.gameObject.SetActive(false);
         TextureButtonsPanel.gameObject.SetActive(true);
-        TextureButtonsPanel.DOAnchorPosY(DisplayPosition.y, 1f).OnComplete(() =>
-        {
-            ItemButtonsPanel.gameObject.SetActive(false);
-        });
-        
+        TextureButtonsPanel.DOAnchorPosY(DisplayPosition.y, 1f);
     }
-    [ContextMenu("ShowItemPanel")]
     public void ShowItemPanel()
     {
         TextureButtonsPanel.anchoredPosition = HidePosition;
+        TextureButtonsPanel.gameObject.SetActive(false);
         ItemButtonsPanel.gameObject.SetActive(true);
-        ItemButtonsPanel.DOAnchorPosY(DisplayPosition.y, 1f).OnComplete(() =>
-        {
-            TextureButtonsPanel.gameObject.SetActive(false);
-        });
+        ItemButtonsPanel.DOAnchorPosY(DisplayPosition.y, 1f);
     }
 
     public void ToggleDropdownVisibility()
