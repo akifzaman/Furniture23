@@ -1,5 +1,7 @@
 using DG.Tweening;
 using System;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,14 +12,17 @@ public class UIManager : MonoBehaviour
     public RectTransform TextureButtonsPanel;
     public Transform ItemButtonsContainer;
     public Transform TextureButtonsContainer;
+    public Transform CategoryButtonsContainer;
     public ScrollViewButtonController ItemButtonPrefab;
     public ScrollViewButtonController TextureButtonPrefab;
+    public GameObject CategoryButtonPrefab;
     public Vector2 DisplayPosition;
     public Vector2 HidePosition;
-    public RectTransform Dropdown;
-    public Image DropdownTogglerIcon;
-    public Vector2 DropdownInitialPosition;
+    public RectTransform CategoryPanel;
+    public Image PanelTogglerIcon;
     public float distance;
+    public float tempValue;
+    public HashSet<ItemType> UniqueItemTypes = new HashSet<ItemType>();
     #region Singleton
     private void Awake()
     {
@@ -33,10 +38,11 @@ public class UIManager : MonoBehaviour
     #endregion
     public void Start()
     {
+        tempValue = distance;
+        IdentifyUniqueItems();
         InstantiateItemButtons();
         DisplayPosition = ItemButtonsPanel.anchoredPosition;
         HidePosition = TextureButtonsPanel.anchoredPosition;
-        DropdownInitialPosition = Dropdown.anchoredPosition;
     }
 
     public void InstantiateItemButtons()
@@ -54,6 +60,24 @@ public class UIManager : MonoBehaviour
         {
             var btn = Instantiate(TextureButtonPrefab, TextureButtonsContainer);
             btn.Initialize(texture);
+        }
+    }
+    public void IdentifyUniqueItems()
+    {
+        foreach (var item in ApplicationManager.instance.Items)
+        {
+            UniqueItemTypes.Add(item.Type);
+        }
+        InstantiateCategoryButtons();
+    }
+    public void InstantiateCategoryButtons()
+    {
+        foreach (var item in UniqueItemTypes)
+        {
+            var btn = Instantiate(CategoryButtonPrefab, CategoryButtonsContainer);
+            string itemType = item.ToString();
+            btn.GetComponentInChildren<TextMeshProUGUI>().text = itemType;
+            btn.GetComponentInChildren<Button>().onClick.AddListener(() => FilterByItemType(itemType));
         }
     }
     public void CleanPanel(Transform panel)
@@ -78,12 +102,11 @@ public class UIManager : MonoBehaviour
         ItemButtonsPanel.DOAnchorPosY(DisplayPosition.y, 1f);
     }
 
-    public void ToggleDropdownVisibility()
+    public void TogglePanelVisibility()
     {
-        distance = Dropdown.gameObject.activeInHierarchy ? -distance : distance;
-        Dropdown.gameObject.SetActive(true);
-        Dropdown.DOAnchorPosX(DropdownInitialPosition.x + distance, 0.25f).SetEase(Ease.Linear); //replace the hardcoded values
-        DropdownTogglerIcon.transform.DOScaleX(DropdownTogglerIcon.transform.localScale.x * -1, 0.10f);      
+        distance = CategoryPanel.transform.position.x < 0 ? tempValue : -tempValue;
+        CategoryPanel.DOAnchorPosX(CategoryPanel.transform.position.x + distance, 0.25f).SetEase(Ease.Linear); //replace the hardcoded values
+        PanelTogglerIcon.transform.DOScaleX(PanelTogglerIcon.transform.localScale.x * -1, 0.10f);      
     }
     public void FilterByItemType(string Type)
     {
