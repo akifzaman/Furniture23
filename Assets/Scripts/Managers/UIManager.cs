@@ -22,6 +22,8 @@ public class UIManager : MonoBehaviour
     public Image PanelTogglerIcon;
     public float distance;
     public float tempValue;
+    public Button DoneButton;
+    public Button RemoveButton;
     public HashSet<ItemType> UniqueItemTypes = new HashSet<ItemType>();
     #region Singleton
     private void Awake()
@@ -93,6 +95,8 @@ public class UIManager : MonoBehaviour
         ItemButtonsPanel.gameObject.SetActive(false);
         TextureButtonsPanel.gameObject.SetActive(true);
         TextureButtonsPanel.DOAnchorPosY(DisplayPosition.y, 1f);
+        DoneButton.transform.DOScale(1, 0.5f).SetEase(Ease.InSine);
+        RemoveButton.transform.DOScale(1, 0.5f).SetEase(Ease.InSine);
     }
     public void ShowItemPanel()
     {
@@ -100,12 +104,14 @@ public class UIManager : MonoBehaviour
         TextureButtonsPanel.gameObject.SetActive(false);
         ItemButtonsPanel.gameObject.SetActive(true);
         ItemButtonsPanel.DOAnchorPosY(DisplayPosition.y, 1f);
+        DoneButton.transform.DOScale(0, 0.5f).SetEase(Ease.InSine);
+        RemoveButton.transform.DOScale(0, 0.5f).SetEase(Ease.InSine);
     }
 
     public void TogglePanelVisibility()
     {
         distance = CategoryPanel.transform.position.x < 0 ? tempValue : -tempValue;
-        CategoryPanel.DOAnchorPosX(CategoryPanel.transform.position.x + distance, 0.25f).SetEase(Ease.Linear); //replace the hardcoded values
+        CategoryPanel.DOAnchorPosX(CategoryPanel.transform.position.x + distance, 0.10f).SetEase(Ease.Linear); //replace the hardcoded values
         PanelTogglerIcon.transform.DOScaleX(PanelTogglerIcon.transform.localScale.x * -1, 0.10f);      
     }
     public void FilterByItemType(string Type)
