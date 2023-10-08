@@ -1690,6 +1690,7 @@ Transform:
   - {fileID: 1232464736}
   - {fileID: 77926274}
   - {fileID: 814476529}
+  - {fileID: 1183100660}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &849265186
@@ -1775,8 +1776,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1183100659}
-        m_TargetAssemblyTypeName: ItemPicker, Assembly-CSharp
+      - m_Target: {fileID: 1232464737}
+        m_TargetAssemblyTypeName: ApplicationManager, Assembly-CSharp
         m_MethodName: DeselectItem
         m_Mode: 1
         m_Arguments:
@@ -2243,7 +2244,7 @@ GameObject:
   - component: {fileID: 1183100660}
   - component: {fileID: 1183100659}
   m_Layer: 0
-  m_Name: ItemPicker
+  m_Name: TouchManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2262,7 +2263,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentGameObject: {fileID: 0}
-  previousGameObject: {fileID: 0}
 --- !u!4 &1183100660
 Transform:
   m_ObjectHideFlags: 0
@@ -2271,12 +2271,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1183100658}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 843478872}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1232464735
 GameObject:
@@ -3952,4 +3952,3 @@ SceneRoots:
   - {fileID: 1637633195}
   - {fileID: 843478872}
   - {fileID: 1576188537}
-  - {fileID: 1183100660}

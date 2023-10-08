@@ -19,5 +19,9 @@ public class ApplicationManager : MonoBehaviour
         }
     }
     #endregion
-
+    public void DeselectItem()
+    {
+        TouchManager.instance.currentGameObject.GetComponent<ItemController>().OnItemDeselect();
+        TouchManager.instance.currentGameObject = null;
+    }
 }

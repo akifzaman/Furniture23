@@ -32,13 +32,13 @@ public class PlaceObject : MonoBehaviour
     private void OnFingerDown(EnhancedTouch.Finger finger)
     {
         if (finger.index != 0) return;
-        if (aRRaycastManager.Raycast(finger.currentTouch.screenPosition, hits, TrackableType.PlaneWithinPolygon) && ItemPicker.instance.currentGameObject == null)
+        if (aRRaycastManager.Raycast(finger.currentTouch.screenPosition, hits, TrackableType.PlaneWithinPolygon) && TouchManager.instance.currentGameObject == null)
         {
             Pose pose = hits[0].pose;
             var obj = Instantiate(ApplicationManager.instance.SelectedItem.Prefab, pose.position, pose.rotation);
-            ItemPicker.instance.currentGameObject = obj;
-            ItemPicker.instance.currentGameObject.GetComponent<ItemController>().initialPosition = pose.position;
-            ItemPicker.instance.currentGameObject.GetComponent<ItemController>().Initialize(ApplicationManager.instance.SelectedItem);
+            TouchManager.instance.currentGameObject = obj;
+            TouchManager.instance.currentGameObject.GetComponent<ItemController>().initialPosition = pose.position;
+            TouchManager.instance.currentGameObject.GetComponent<ItemController>().Initialize(ApplicationManager.instance.SelectedItem);
         }
     }
 }
