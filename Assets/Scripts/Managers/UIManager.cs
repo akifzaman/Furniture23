@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -83,5 +84,21 @@ public class UIManager : MonoBehaviour
         Dropdown.gameObject.SetActive(true);
         Dropdown.DOAnchorPosX(DropdownInitialPosition.x + distance, 0.25f).SetEase(Ease.Linear); //replace the hardcoded values
         DropdownTogglerIcon.transform.DOScaleX(DropdownTogglerIcon.transform.localScale.x * -1, 0.10f);      
+    }
+    public void FilterByItemType(string Type)
+    {
+        Enum.TryParse(Type, false, out ItemType itemType);
+        foreach (Transform item in ItemButtonsContainer)
+        {
+            item.gameObject.SetActive(true);
+        }
+        if (itemType == ItemType.All) return;
+        foreach (Transform item in ItemButtonsContainer)
+        {
+            if (item.GetComponent<ScrollViewButtonController>().item.Type != itemType)
+            {
+                item.gameObject.SetActive(false);
+            }
+        }
     }
 }

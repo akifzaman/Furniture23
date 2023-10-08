@@ -11,6 +11,7 @@ public class ScrollViewButtonController : MonoBehaviour
     {
         button = GetComponent<Button>();
         ButtonIcon.sprite = item.ItemIcon;
+        this.item = item;
         button.onClick.AddListener(() => UpdateSelectedItem(item));
     }
     public void Initialize(Sprite texture) //for texture buttons

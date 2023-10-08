@@ -24,4 +24,10 @@ public class ApplicationManager : MonoBehaviour
         TouchManager.instance.currentGameObject.GetComponent<ItemController>().OnItemDeselect();
         TouchManager.instance.currentGameObject = null;
     }
+    public void RemoveItemFromWorldSpace()
+    {
+        TouchManager.instance.currentGameObject.GetComponent<ItemController>().OnItemDeselect();
+        Destroy(TouchManager.instance.currentGameObject);
+        TouchManager.instance.currentGameObject = null;
+    }
 }
