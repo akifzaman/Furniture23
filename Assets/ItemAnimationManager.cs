@@ -40,7 +40,7 @@ public class ItemAnimationManager : MonoBehaviour
     public void StopHoverAnimation(Vector3 initialPosition, GameObject item)
     {
         DOTween.Kill(item?.transform);
-        if (item?.transform.position == initialPosition) return;
-        item?.transform.DOMove(initialPosition, 1f).SetEase(Ease.Linear);
+        if (item?.transform.position.y == initialPosition.y) return;
+        item?.transform.DOMoveY(initialPosition.y, 1f).SetEase(Ease.Linear);
     }
 }

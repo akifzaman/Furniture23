@@ -32,7 +32,7 @@ public class PlaceObject : MonoBehaviour
     private void OnFingerDown(EnhancedTouch.Finger finger)
     {
         if (finger.index != 0) return;
-        if (aRRaycastManager.Raycast(finger.currentTouch.screenPosition, hits, TrackableType.PlaneWithinPolygon))
+        if (aRRaycastManager.Raycast(finger.currentTouch.screenPosition, hits, TrackableType.PlaneWithinPolygon) && ItemPicker.instance.currentGameObject == null)
         {
             Pose pose = hits[0].pose;
             var obj = Instantiate(ApplicationManager.instance.SelectedItem.Prefab, pose.position, pose.rotation);
