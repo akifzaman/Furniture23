@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class TouchManager : MonoBehaviour
 {
@@ -20,7 +22,7 @@ public class TouchManager : MonoBehaviour
     #endregion
     private void Update()
     {
-        if (Input.touchCount > 0 && Input.touchCount < 2)
+        if (Input.touchCount > 0 && Input.touchCount < 2 && !IsPointerOverUIElement(Input.GetTouch(0).position))
         {
             if (Input.GetTouch(0).phase == TouchPhase.Began)
             {
@@ -40,7 +42,7 @@ public class TouchManager : MonoBehaviour
                 currentGameObject.GetComponent<ItemController>().MoveItem(Input.GetTouch(0));
             }
         }
-        else if (Input.touchCount == 2)
+        else if (Input.touchCount == 2 && !IsPointerOverUIElement(Input.GetTouch(0).position) && !IsPointerOverUIElement(Input.GetTouch(1).position))
         {
             Touch touch1 = Input.GetTouch(0);
             Touch touch2 = Input.GetTouch(1);
@@ -54,5 +56,14 @@ public class TouchManager : MonoBehaviour
             }
             else currentGameObject.GetComponent<ItemController>().isModified = false;
         }
+    }
+    // Helper function to check if a UI element is at a specific position
+    public bool IsPointerOverUIElement(Vector2 position)
+    {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = position;
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        return results.Count > 0;
     }
 }
