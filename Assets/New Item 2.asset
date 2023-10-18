@@ -20,5 +20,7 @@ MonoBehaviour:
   AvailableTextures:
   - {fileID: 21300000, guid: af6bcea09b8134831b6599e2900aef81, type: 3}
   - {fileID: 21300000, guid: af6bcea09b8134831b6599e2900aef81, type: 3}
-  Materials: []
+  Materials:
+  - {fileID: 2100000, guid: 2ebd8de1f5e036842b827e438cd9405d, type: 2}
+  - {fileID: 2100000, guid: 5ee8ba9de374e974e933b3510cad26c3, type: 2}
   Index: 2

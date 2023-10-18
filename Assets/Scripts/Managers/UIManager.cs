@@ -58,10 +58,10 @@ public class UIManager : MonoBehaviour
     public void InstantiateTextureButtons(Item item)
     {
         CleanPanel(TextureButtonsContainer);
-        foreach (var texture in item.AvailableTextures)
+        for (int i = 0; i < item.AvailableTextures.Count; i++)
         {
             var btn = Instantiate(TextureButtonPrefab, TextureButtonsContainer);
-            btn.Initialize(texture);
+            btn.Initialize(i, item.AvailableTextures[i]);
         }
     }
     public void IdentifyUniqueItems()

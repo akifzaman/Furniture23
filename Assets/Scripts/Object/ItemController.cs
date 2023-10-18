@@ -3,7 +3,7 @@ using cakeslice;
 
 public class ItemController : MonoBehaviour
 {
-    private Item item;
+    public Item item;
     public float scaleDuration;
     [SerializeField] private Vector3 targetScale;
     public Vector3 initialPosition; 
